@@ -7,7 +7,7 @@ _t_timelog() {
 
 # Run a ledger command on the timelog
 _t_ledger() {
-  ledger -f $timelog "$@"
+  hledger -f $timelog "$@"
 }
 
 # do something in unix with the timelog
@@ -86,7 +86,7 @@ case "${action}" in
   out)  _t_out "$@";;
   sw)   _t_sw "$@";;
   bal) _t_ledger bal "$@";;
-  hours) _t_ledger bal -p "since today" "$@";;
+  hours) _t_ledger bal -p "today" "$@";;
   switch)   _t_sw "$@";;
   edit) _t_do $EDITOR "$@";;
   cur)  _t_cur "$@";;
