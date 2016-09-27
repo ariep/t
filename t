@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Date format used in timelog
+format='%Y-%m-%d %H:%M'
+
 # Show current timelog
 _t_timelog() {
   echo "$timelog"
@@ -20,18 +23,18 @@ _t_do() {
 # Clock in to the last project if no project is given
 _t_in() {
   [ ! "$1" ] && set -- "$@" "$(_t_last)"
-  echo i `date '+%Y-%m-%d %H:%M:%S'` $* >>$timelog
+  echo i `date "+$format"` $* >>$timelog
 }
 
 # Clock out
 _t_out() {
-  echo o `date '+%Y-%m-%d %H:%M:%S'` $* >>$timelog
+  echo o `date "+$format"` $* >>$timelog
 }
 
 # switch projects
 _t_sw() {
-  echo o `date '+%Y-%m-%d %H:%M:%S'` >>$timelog
-  echo i `date '+%Y-%m-%d %H:%M:%S'` $* >>$timelog
+  echo o `date "+$format"` >>$timelog
+  echo i `date "+$format"` $* >>$timelog
 }
 
 # Show the currently clocked-in project
