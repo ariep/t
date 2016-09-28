@@ -21,20 +21,29 @@ _t_do() {
 
 # Clock in to the given project
 # Clock in to the last project if no project is given
+# Add an argument of the form "-5" to clock in 5 minutes ago,
+# or "@12:50" to clock in at the given time.
 _t_in() {
-  [ ! "$1" ] && set -- "$@" "$(_t_last)"
-  echo i `date "+$format"` $* >>$timelog
+  __t_timeshift "$@"
+  # [ ! "$1" ] && set -- "$@" "$(_t_last)"
+  if [ -z "$__rest" ];
+  then
+    __rest=$(_t_last)
+  fi
+  echo i `date -d "$__time" "+$format"` $__rest >> $timelog
 }
 
 # Clock out
 _t_out() {
-  echo o `date "+$format"` $* >>$timelog
+  __t_timeshift "$@"
+  echo o `date -d "$__time" "+$format"` $__rest >> $timelog
 }
 
 # switch projects
 _t_sw() {
-  echo o `date "+$format"` >>$timelog
-  echo i `date "+$format"` $* >>$timelog
+  __t_timeshift "$@"
+  echo o `date -d "$__time" "+$format"` >> $timelog
+  echo i `date -d "$__time" "+$format"` $__rest >> $timelog
 }
 
 # Show the currently clocked-in project
@@ -79,6 +88,21 @@ __t_extract_project() {
             line = line " " $i;
           print line
       }'
+}
+
+__t_timeshift() {
+  __time="now"
+  __rest=""
+  while (( "$#" ));
+  do
+    case "$1" in
+      -*) __time="$1 minutes" ;;
+      +*) __time="$1 minutes" ;;
+      @*) __time="${1/@/}"    ;;
+      *)  __rest="$__rest $1"
+    esac
+    shift
+  done
 }
 
 action=$1; shift
