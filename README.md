@@ -2,13 +2,13 @@
 
 ## Description ##
 
-t is a shell script for working with [ledger][]'s [timelog][] format.
+`t` is a shell script for working with [hledger][]'s [timeclock][] format.
 
 ## Install ##
 
-Download and install the script to a `bin` directory that exists in your `$PATH`. For example, `$HOME/bin`:
+Download and install the script to a directory that exists in your `$PATH`. For example, `$HOME/bin`:
 
-    curl --silent -G https://raw.github.com/nuex/t/master/t -o ~/bin/t
+    curl --silent -G https://raw.github.com/ariep/t/master/t -o ~/bin/t
     chmod +x ~/bin/t
 
 Set the location of your timelog file:
@@ -38,12 +38,10 @@ Usage: `t <action>`
 
 ## References ##
 
-Even though this works with [ledger][] 3, the [timelog][] format is only referenced in the [ledger][] v2 documents.  Here are a few resources about the [timelog][] format:
+Here are you can read more about the timeclock file format, and how to extract reports
+from your timelog file using [hledger][]:
 
-- [Using timeclock to record billable time][timelog]
-- [timelog files][htl] - from the [hledger][] project
+- [Timeclock files][timeclock]
 
-[ledger]: http://ledger-cli.org
-[timelog]: http://ledger-cli.org/2.6/ledger.html#Using-timeclock-to-record-billable-time
-[htl]: http://hledger.org/MANUAL.html#timelog-files
+[timeclock]: http://hledger.org/manual.html#timeclock-format
 [hledger]: http://hledger.org/
