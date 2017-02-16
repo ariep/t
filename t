@@ -114,6 +114,7 @@ case "${action}" in
   sw)   _t_sw "$@";;
   bal) _t_ledger bal "$@";;
   hours) _t_ledger bal -p "today" "$@";;
+  month) _t_ledger bal -p "this month" "$@";;
   switch)   _t_sw "$@";;
   edit) _t_do $EDITOR "$@";;
   cur)  _t_cur "$@";;
